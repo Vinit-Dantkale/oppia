@@ -19,7 +19,10 @@
 from __future__ import absolute_import  # pylint: disable=import-only-modules
 from __future__ import unicode_literals  # pylint: disable=import-only-modules
 
+from pydub import AudioSegment
 import json
+import os
+import mutagen
 
 from core.domain import fs_domain
 from core.platform import models

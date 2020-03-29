@@ -184,6 +184,9 @@ angular.module('oppia').factory('AssetsBackendApiService', [
       var form = new FormData();
 
       form.append('raw_audio_file', rawAssetData);
+      console.log(typeof(rawAssetData));
+      console.log(rawAssetData instanceof Blob)
+      console.log(rawAssetData instanceof String)
       form.append('payload', JSON.stringify({
         filename: filename
       }));

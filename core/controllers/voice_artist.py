@@ -24,6 +24,7 @@ from core.controllers import base
 from core.domain import fs_domain
 from core.domain import fs_services
 from core.domain import user_services
+from core.domain import trim_audio
 import feconf
 import python_utils
 
@@ -106,8 +107,16 @@ class AudioUploadHandler(base.BaseHandler):
         # deleted before opening cloud storage. If not, cloud storage
         # throws a very mysterious error that entails a mutagen
         # object being recursively passed around in app engine.
-        del audio
+        #print(mutagen.FileType(tempbuffer))
+        trimming_metadata = {
+            'trimming_points':
+                [{'start_point':2000, 'end_point':7000},
+                {'start_point':3000, 'end_point':9000}]
+            }
+        trimming_metadata = trim_audio.trim(
+            extension, filename, raw_audio_file, trimming_metadata)
 
+        del audio
         # Audio files are stored to the datastore in the dev env, and to GCS
         # in production.
         file_system_class = fs_services.get_entity_file_system_class()
@@ -129,3 +138,29 @@ class StartedTranslationTutorialEventHandler(base.BaseHandler):
         user_services.record_user_started_state_translation_tutorial(
             self.user_id)
         self.render_json({})
+
+
+
+'''
+from core.domain import trim_audio_service
+
+class AudioUploadHandler(base.BaseHandler):
+...
+    def post(...):
+        ...
+        trimming_metadata = trim_audio_service.trim(
+            extension, filename, raw_audio, trimming_metadata)
+        del audio
+
+        for trimming_point in trimmed_metadata.trimming_points:
+            fs.commit(
+                '%s/%s' % (self._FILENAME_PREFIX, filename),
+                raw_audio_file, mimetype=mimetype)
+
+        self.render_json({'filename': filename, 'duration_secs': duration_secs})
+'''
+
+
+
+
+

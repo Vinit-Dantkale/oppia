@@ -55,6 +55,14 @@
         "rootDirPrefix": "html5lib-python-",
         "targetDirPrefix": "html5lib-python-"
       },
+      "pydub": {
+        "version": "0.23.1",
+        "downloadFormat": "tar",
+        "url": "https://files.pythonhosted.org/packages/aa/20/e6ec4fe31d56d2ad4d6adbbd3afd03bb9b960926c42dfb1fdf42dc826787/pydub-0.23.1.tar.gz",
+        "tarRootDirPrefix": "pydub-",
+        "rootDirPrefix": "pydub-",
+        "targetDirPrefix": "pydub-"
+      },
       "simpleJson": {
         "version": "3.16.0",
         "downloadFormat": "tar",

@@ -34,8 +34,8 @@ require('domain/utilities/url-interpolation.service.ts');
 require('services/assets-backend-api.service.ts');
 require('services/csrf-token.service.ts');
 
-describe('Assets Backend API Service', function() {
-  describe('on dev mode', function() {
+fdescribe('Assets Backend API Service', function() {
+  fdescribe('on dev mode', function() {
     var AssetsBackendApiService = null;
     var fileDownloadRequestObjectFactory = null;
     var UrlInterpolationService = null;
@@ -271,7 +271,7 @@ describe('Assets Backend API Service', function() {
       $httpBackend.verifyNoOutstandingExpectation();
     });
 
-    it('should successfully save an audio', function(done) {
+    fit('should successfully save an audio', function(done) {
       var successMessage = 'Audio was successfully saved.';
       // @ts-ignore in order to ignore JQuery properties that should
       // be declarated.
@@ -291,7 +291,7 @@ describe('Assets Backend API Service', function() {
       $rootScope.$apply();
     });
 
-    it('should handle rejection when saving a file fails', function(done) {
+    fit('should handle rejection when saving a file fails', function(done) {
       var errorMessage = 'Error on saving audio';
       // @ts-ignore in order to ignore JQuery properties that should
       // be declarated.
@@ -464,7 +464,7 @@ describe('Assets Backend API Service', function() {
     });
   });
 
-  describe('without dev mode settings', function() {
+  fdescribe('without dev mode settings', function() {
     beforeEach(angular.mock.module('oppia'));
     beforeEach(angular.mock.module('oppia', function($provide) {
       $provide.value('AudioFileObjectFactory', new AudioFileObjectFactory());
@@ -492,7 +492,7 @@ describe('Assets Backend API Service', function() {
       }));
   });
 
-  describe('on production mode', function() {
+  fdescribe('on production mode', function() {
     var AssetsBackendApiService = null;
     var ENTITY_TYPE = null;
     var gcsPrefix = 'https://storage.googleapis.com/None-resources';
