@@ -34,8 +34,8 @@ require('domain/utilities/url-interpolation.service.ts');
 require('services/assets-backend-api.service.ts');
 require('services/csrf-token.service.ts');
 
-describe('Assets Backend API Service', function() {
-  describe('on dev mode', function() {
+fdescribe('Assets Backend API Service', function() {
+  fdescribe('on dev mode', function() {
     var AssetsBackendApiService = null;
     var fileDownloadRequestObjectFactory = null;
     var UrlInterpolationService = null;
@@ -109,21 +109,21 @@ describe('Assets Backend API Service', function() {
       $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('should correctly formulate the download URL for audio', function() {
+    fit('should correctly formulate the download URL for audio', function() {
       expect(
         AssetsBackendApiService.getAudioDownloadUrl(
           ENTITY_TYPE.EXPLORATION, 'expid12345', 'a.mp3')
       ).toEqual('/assetsdevhandler/exploration/expid12345/assets/audio/a.mp3');
     });
 
-    it('should correctly formulate the preview URL for images', function() {
+    fit('should correctly formulate the preview URL for images', function() {
       expect(
         AssetsBackendApiService.getImageUrlForPreview(
           ENTITY_TYPE.EXPLORATION, 'expid12345', 'a.png')
       ).toEqual('/assetsdevhandler/exploration/expid12345/assets/image/a.png');
     });
 
-    it('should correctly formulate the thumbnail url for preview', function() {
+    fit('should correctly formulate the thumbnail url for preview', function() {
       expect(
         AssetsBackendApiService.getThumbnailUrlForPreview(
           ENTITY_TYPE.EXPLORATION, 'expid12345', 'thumbnail.png')).toEqual(
@@ -131,7 +131,7 @@ describe('Assets Backend API Service', function() {
         'thumbnail/thumbnail.png');
     });
 
-    it('should successfully fetch and cache audio', function() {
+    fit('should successfully fetch and cache audio', function() {
       var successHandler = jasmine.createSpy('success');
       var failHandler = jasmine.createSpy('fail');
 
@@ -152,7 +152,7 @@ describe('Assets Backend API Service', function() {
       $httpBackend.verifyNoOutstandingExpectation();
     });
 
-    it('should not fetch an audio if it is already cached', function() {
+    fit('should not fetch an audio if it is already cached', function() {
       var successHandler = jasmine.createSpy('success');
       var failHandler = jasmine.createSpy('fail');
 
@@ -177,7 +177,7 @@ describe('Assets Backend API Service', function() {
       $httpBackend.verifyNoOutstandingExpectation();
     });
 
-    it('should handler rejection when fetching a file fails', function() {
+    fit('should handler rejection when fetching a file fails', function() {
       var successHandler = jasmine.createSpy('success');
       var failHandler = jasmine.createSpy('fail');
 
@@ -194,7 +194,7 @@ describe('Assets Backend API Service', function() {
       $httpBackend.verifyNoOutstandingExpectation();
     });
 
-    it('should handler rejection on trying to process fetched file when' +
+    fit('should handler rejection on trying to process fetched file when' +
       ' Blob throws a TypeError and BlobBuilder does not exist', function() {
       var successHandler = jasmine.createSpy('success');
       var failHandler = jasmine.createSpy('fail');
@@ -214,7 +214,7 @@ describe('Assets Backend API Service', function() {
       $httpBackend.verifyNoOutstandingExpectation();
     });
 
-    it('should handler rejection on trying to process fetched file when Blob' +
+    fit('should handler rejection on trying to process fetched file when Blob' +
       ' throws a TypeError and BlobBuilder does not work correctly',
     function() {
       var successHandler = jasmine.createSpy('success');
@@ -239,7 +239,7 @@ describe('Assets Backend API Service', function() {
       $httpBackend.verifyNoOutstandingExpectation();
     });
 
-    it('should successfully process a fetch file when Blob throws a TypeError' +
+    fit('should successfully process a fetch file when Blob throws a TypeError' +
       ' and BlobBuilder is correctly implemented', function() {
       var successHandler = jasmine.createSpy('success');
       var failHandler = jasmine.createSpy('fail');
@@ -271,7 +271,7 @@ describe('Assets Backend API Service', function() {
       $httpBackend.verifyNoOutstandingExpectation();
     });
 
-    it('should successfully save an audio', function(done) {
+    fit('should successfully save an audio', function(done) {
       var successMessage = 'Audio was successfully saved.';
       // @ts-ignore in order to ignore JQuery properties that should
       // be declarated.
@@ -291,7 +291,7 @@ describe('Assets Backend API Service', function() {
       $rootScope.$apply();
     });
 
-    it('should handle rejection when saving a file fails', function(done) {
+    fit('should handle rejection when saving a file fails', function(done) {
       var errorMessage = 'Error on saving audio';
       // @ts-ignore in order to ignore JQuery properties that should
       // be declarated.
@@ -322,7 +322,7 @@ describe('Assets Backend API Service', function() {
       $rootScope.$apply();
     });
 
-    it('should successfully fetch and cache image', function() {
+    fit('should successfully fetch and cache image', function() {
       var successHandler = jasmine.createSpy('success');
       var failHandler = jasmine.createSpy('fail');
 
@@ -343,7 +343,7 @@ describe('Assets Backend API Service', function() {
       $httpBackend.verifyNoOutstandingExpectation();
     });
 
-    it('should not fetch an image if it is already cached', function() {
+    fit('should not fetch an image if it is already cached', function() {
       var successHandler = jasmine.createSpy('success');
       var failHandler = jasmine.createSpy('fail');
 
@@ -370,7 +370,7 @@ describe('Assets Backend API Service', function() {
       $httpBackend.verifyNoOutstandingExpectation();
     });
 
-    it('should call the provided failure handler on HTTP failure for an audio',
+    fit('should call the provided failure handler on HTTP failure for an audio',
       function() {
         var successHandler = jasmine.createSpy('success');
         var failHandler = jasmine.createSpy('fail');
@@ -386,7 +386,7 @@ describe('Assets Backend API Service', function() {
         $httpBackend.verifyNoOutstandingExpectation();
       });
 
-    it('should call the provided failure handler on HTTP failure for an image',
+    fit('should call the provided failure handler on HTTP failure for an image',
       function() {
         var successHandler = jasmine.createSpy('success');
         var failHandler = jasmine.createSpy('fail');
@@ -402,7 +402,7 @@ describe('Assets Backend API Service', function() {
         $httpBackend.verifyNoOutstandingExpectation();
       });
 
-    it('should successfully abort the download of all the audio files',
+    fit('should successfully abort the download of all the audio files',
       function() {
         var successHandler = jasmine.createSpy('success');
         var failHandler = jasmine.createSpy('fail');
@@ -422,7 +422,7 @@ describe('Assets Backend API Service', function() {
         expect(AssetsBackendApiService.isCached('myfile.mp3')).toBe(false);
       });
 
-    it('should successfully abort the download of the all the image files',
+    fit('should successfully abort the download of the all the image files',
       function() {
         var successHandler = jasmine.createSpy('success');
         var failHandler = jasmine.createSpy('fail');
@@ -443,7 +443,7 @@ describe('Assets Backend API Service', function() {
         expect(AssetsBackendApiService.isCached('myfile.png')).toBe(false);
       });
 
-    it('should use the correct blob type for audio assets', function() {
+    fit('should use the correct blob type for audio assets', function() {
       var successHandler = jasmine.createSpy('success');
       var failHandler = jasmine.createSpy('fail');
 
@@ -482,7 +482,7 @@ describe('Assets Backend API Service', function() {
       }
     }));
 
-    it('should throw an error when is not on dev mode and Google Cloud' +
+    fit('should throw an error when is not on dev mode and Google Cloud' +
       ' Service bucket name is not set', angular.mock.inject(
       function($injector) {
         expect(function() {
@@ -519,7 +519,7 @@ describe('Assets Backend API Service', function() {
       ENTITY_TYPE = $injector.get('ENTITY_TYPE');
     }));
 
-    it('should correctly formulate the download URL for audios', function() {
+    fit('should correctly formulate the download URL for audios', function() {
       expect(
         AssetsBackendApiService.getAudioDownloadUrl(
           ENTITY_TYPE.EXPLORATION, 'expid12345', 'a.mp3')
@@ -527,14 +527,14 @@ describe('Assets Backend API Service', function() {
         '/exploration/expid12345/assets/audio/a.mp3');
     });
 
-    it('should correctly formulate the preview URL for images', function() {
+    fit('should correctly formulate the preview URL for images', function() {
       expect(
         AssetsBackendApiService.getImageUrlForPreview(
           ENTITY_TYPE.EXPLORATION, 'expid12345', 'a.png')
       ).toEqual(gcsPrefix + '/exploration/expid12345/assets/image/a.png');
     });
 
-    it('should correctly formulate the thumbnail url for preview', function() {
+    fit('should correctly formulate the thumbnail url for preview', function() {
       expect(
         AssetsBackendApiService.getThumbnailUrlForPreview(
           ENTITY_TYPE.EXPLORATION, 'expid12345', 'thumbnail.png')

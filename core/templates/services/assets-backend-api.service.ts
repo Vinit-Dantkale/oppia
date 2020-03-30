@@ -178,6 +178,38 @@ angular.module('oppia').factory('AssetsBackendApiService', [
       }
     };
 
+    var testfunc = function(successCallback, errorCallback){
+      for(var i=0;i<10;i++){
+        form.append('raw_audio_file', new File([], 'a'+i+'.mp3'));
+        form.append('payload', JSON.stringify({
+          filename: 'a'+i+'.mp3'
+        }));
+      }
+      console.log("testfunc");
+      CsrfTokenService.getTokenAsync().then(function(token) {
+        form.append('csrf_token', token);
+        $.ajax({
+          url: _getAudioUploadUrl(0),
+          data: form,
+          processData: false,
+          contentType: false,
+          type: 'POST',
+          dataType: 'text',
+          dataFilter: removeXSSIPrefix,
+        }).done(function(response) {
+          if (successCallback) {
+            successCallback(response);
+          }
+        }).fail(function(data) {
+          // Remove the XSSI prefix.
+          var parsedResponse = removeXSSIPrefix(data.responseText);
+          if (errorCallback) {
+            errorCallback(parsedResponse);
+          }
+        });
+      });
+    }
+
     var _saveAudio = function(
         explorationId, filename, rawAssetData, successCallback,
         errorCallback) {
@@ -302,3 +334,30 @@ angular.module('oppia').factory('AssetsBackendApiService', [
     };
   }
 ]);
+
+
+//Include ng-file-upload library
+var _uploadMultipleAudios = function(audiosToBeUploaded, explorationId) {
+  ...
+  Upload.upload({
+    url: _getAudioUploadUrl(explorationId),
+    data: {
+      files: audiosToBeUploaded
+    }
+  }).then(
+    (response) => {...} ,
+    (response) => {...});
+  ...
+}
+
+
+
+
+
+
+
+
+
+
+
+

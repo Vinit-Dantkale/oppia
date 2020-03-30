@@ -123,7 +123,8 @@ angular.module('oppia').directive('audioTranslationBar', [
             StateEditorService, StateRecordedVoiceoversService,
             TranslationLanguageService, TranslationStatusService,
             TranslationTabActiveContentIdService, VoiceoverRecordingService,
-            RECORDING_TIME_LIMIT) {
+            RECORDING_TIME_LIMIT)
+        {
           var ctrl = this;
           var saveRecordedVoiceoversChanges = function() {
             StateRecordedVoiceoversService.saveDisplayedValue();
@@ -139,6 +140,11 @@ angular.module('oppia').directive('audioTranslationBar', [
                 StateRecordedVoiceoversService.displayed.getVoiceover(
                   contentId, languageCode));
             }
+          };
+
+          var testfunc = function(){
+            console.log("testfunc");
+            AssetsBackendApiService.testfunc();
           };
 
           var cancelTimer = function() {
@@ -288,6 +294,7 @@ angular.module('oppia').directive('audioTranslationBar', [
             var recordedAudioFile = new File(
               [$scope.audioBlob], filename, {type: fileType});
             $scope.showRecorderWarning = false;
+            /*
             AssetsBackendApiService.saveAudio(
               ContextService.getExplorationId(), filename,
               recordedAudioFile).then(function(response) {
@@ -310,6 +317,7 @@ angular.module('oppia').directive('audioTranslationBar', [
               AlertsService.addWarning(errorResponse.error);
               $scope.initAudioBar();
             });
+            */
           };
           var toggleStartAndStopRecording = function() {
             if ($scope.isAudioAvailable) {
@@ -323,7 +331,12 @@ angular.module('oppia').directive('audioTranslationBar', [
             }
           };
 
-          $scope.openTranslationTabBusyModal = function() {
+          $scope.openTranslationTabBusyModal = function()
+          {
+            AssetsBackendApiService.testfunc();
+            /*
+
+
             $uibModal.open({
               templateUrl: UrlInterpolationService.getDirectiveTemplateUrl(
                 '/pages/exploration-editor-page/translation-tab/' +
@@ -348,6 +361,7 @@ angular.module('oppia').directive('audioTranslationBar', [
               // This callback is triggered when the Cancel button is clicked.
               // No further action is needed.
             });
+          */
           };
 
           $scope.playPauseUploadedAudioTranslation = function(languageCode) {
@@ -535,6 +549,9 @@ angular.module('oppia').directive('audioTranslationBar', [
                       $scope.saveInProgress = true;
                       var explorationId = (
                         ContextService.getExplorationId());
+                      console.log(explorationId);
+                      console.log(generatedFilename)
+                      console.log(uploadedFile)
                       AssetsBackendApiService.saveAudio(
                         explorationId, generatedFilename, uploadedFile
                       ).then(function(response) {
@@ -643,3 +660,37 @@ angular.module('oppia').directive('audioTranslationBar', [
         }]
     };
   }]);
+
+
+
+
+angular.module('oppia').directive('addMultipleAudios', [...
+    controller: [......
+      function(......) {
+        $scope.appendAudiosToList = function() {...
+          //Get list of all the files
+          $uibModal.open(...)
+          //Store the details in $scope.audiosList
+        }
+
+        $scope.removeFromList = function(audioIndex) {...
+          audiosToBeUploaded.splice(audioIndex, 1) ;
+        }
+
+        $scope.uploadMultipleAudios = function() {...
+          AssetsBackendApiService.uploadMultipleAudios(audiosToBeUploaded)
+          .then(...);
+        }
+
+        ctrl.$onInit = function() {
+          $scope.audiosToBeUploaded = [...];
+        }}]
+   }]);
+
+
+
+
+
+
+
+
