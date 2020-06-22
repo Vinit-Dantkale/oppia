@@ -26,10 +26,6 @@ import { AnswerClassificationResultObjectFactory } from
   'domain/classifier/AnswerClassificationResultObjectFactory';
 import { AnswerClassificationService } from
   'pages/exploration-player-page/services/answer-classification.service';
-import { CamelCaseToHyphensPipe } from
-  'filters/string-utility-filters/camel-case-to-hyphens.pipe';
-import { ConvertToPlainTextPipe } from
-  'filters/string-utility-filters/convert-to-plain-text.pipe.ts';
 import { LearnerAnswerDetailsBackendApiService } from
   'domain/statistics/learner-answer-details-backend-api.service.ts';
 import { LearnerAnswerInfoService } from
@@ -37,7 +33,7 @@ import { LearnerAnswerInfoService } from
 import { OutcomeObjectFactory } from
   'domain/exploration/OutcomeObjectFactory.ts';
 import { State, StateObjectFactory } from 'domain/state/StateObjectFactory.ts';
-import { UpgradedServices } from 'services/UpgradedServices';
+//import { UpgradedServices } from 'services/UpgradedServices';
 
 class MockLearnerAnswerDetailsBackendApiService {}
 class MockAnswerClassificationService {
@@ -60,7 +56,7 @@ fdescribe('Learner answer info service', () => {
   let DEFAULT_OUTCOME_CLASSIFICATION;
   let httpTestingController;
 
-  beforeEach(angular.mock.inject(() => {
+  beforeEach(() => {
     stateDict = {
       content: {
         content_id: 'content',
@@ -158,10 +154,8 @@ fdescribe('Learner answer info service', () => {
       {
         provide: AnswerClassificationService,
         useClass: MockAnswerClassificationService
-      },
-      CamelCaseToHyphensPipe,
-      ConvertToPlainTextPipe]
-    }).compileComponents();
+      }]
+    });
     httpTestingController = TestBed.get(HttpTestingController);
     sof = TestBed.get(StateObjectFactory);
     oof = TestBed.get(OutcomeObjectFactory);
@@ -198,7 +192,7 @@ fdescribe('Learner answer info service', () => {
     // canAskLearnerAnswerInfo which is a boolean variable as true as every
     // probability index is greater than 0.
     spyOn(Math, 'random').and.returnValue(0);
-  }));
+  });
 
   afterEach(() => {
     httpTestingController.verify();
