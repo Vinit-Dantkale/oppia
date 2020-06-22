@@ -30,11 +30,11 @@ interface ProbabilityIndexes {
   typeA: number;
   typeB: number;
   typeC: number;
-}
+};
 
 @Injectable({
   providedIn: 'root'
-});
+})
 export class LearnerAnswerInfoService {
   constructor(
     private answerClassificationService: AnswerClassificationService,
@@ -68,10 +68,10 @@ export class LearnerAnswerInfoService {
   };
 
   private getRandomProbabilityIndex(): number {
-    var min = 0;
-    var max = 100;
+    let min = 0;
+    let max = 100;
     return (Math.floor(Math.random() * (max - min + 1) ) + min) / 100;
-  };
+  }
 
   initLearnerAnswerInfoService(
       entityId: string, state: State, answer: string,
@@ -82,7 +82,7 @@ export class LearnerAnswerInfoService {
     this.currentInteractionRulesService = interactionRulesService;
     this.stateName = state.name;
     this.interactionId = state.interaction.id;
-    var defaultOutcome = state.interaction.defaultOutcome;
+    let defaultOutcome = state.interaction.defaultOutcome;
 
     if (this.submittedAnswerInfoCount === 2) {
       return;
@@ -105,14 +105,14 @@ export class LearnerAnswerInfoService {
       this.canAskLearnerForAnswerInfo = true;
       return;
     }
-
-    var classificationResult = (
+    /*
+    let classificationResult = (
       this.answerClassificationService.getMatchingClassificationResult(
         this.stateName, state.interaction, new Object(answer),
         interactionRulesService));
-    var outcome = classificationResult.outcome;
-    var thresholdProbabilityIndex = null;
-    var randomProbabilityIndex = this.getRandomProbabilityIndex();
+    let outcome = classificationResult.outcome;
+    let thresholdProbabilityIndex = null;
+    let randomProbabilityIndex = this.getRandomProbabilityIndex();
     if (outcome === defaultOutcome) {
       thresholdProbabilityIndex = this.probabilityIndexes.typeA;
     } else if (outcome.labelledAsCorrect) {
@@ -120,8 +120,10 @@ export class LearnerAnswerInfoService {
     } else {
       thresholdProbabilityIndex = this.probabilityIndexes.typeC;
     }
+
     this.canAskLearnerForAnswerInfo = (
       randomProbabilityIndex <= thresholdProbabilityIndex);
+    */
   }
 
   resetSubmittedAnswerInfoCount(): void {
@@ -150,13 +152,13 @@ export class LearnerAnswerInfoService {
   }
 
   getSolicitAnswerDetailsQuestion(): string {
-    var el = $('<p>');
+    let el = $('<p>');
     el.attr('translate', 'I18N_SOLICIT_ANSWER_DETAILS_QUESTION');
     return ($('<span>').append(el)).html();
   }
 
   getSolicitAnswerDetailsFeedback(): string {
-    var el = $('<p>');
+    let el = $('<p>');
     el.attr('translate', 'I18N_SOLICIT_ANSWER_DETAILS_FEEDBACK');
     return ($('<span>').append(el)).html();
   }

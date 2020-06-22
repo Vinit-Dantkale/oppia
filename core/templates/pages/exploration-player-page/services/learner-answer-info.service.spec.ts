@@ -60,7 +60,7 @@ fdescribe('Learner answer info service', () => {
   let DEFAULT_OUTCOME_CLASSIFICATION;
   let httpTestingController;
 
-  beforeEach(() => {
+  beforeEach(angular.mock.inject(() => {
     stateDict = {
       content: {
         content_id: 'content',
@@ -170,9 +170,11 @@ fdescribe('Learner answer info service', () => {
     secondState = sof.createFromBackendDict('fake state', stateDict);
     thirdState = sof.createFromBackendDict('demo state', stateDict);
     ladbas = TestBed.get(LearnerAnswerDetailsBackendApiService);
+    console.log(JSON.stringify(ladbas)+"ladbas");
     answerClassificationService = TestBed.get(AnswerClassificationService);
+    console.log(JSON.stringify(answerClassificationService)+"acs");
     learnerAnswerInfoService = TestBed.get(LearnerAnswerInfoService);
-    //console.log(JSON.stringify(learnerAnswerInfoService)+"lais");
+    console.log(JSON.stringify(learnerAnswerInfoService)+"lais");
     DEFAULT_OUTCOME_CLASSIFICATION = TestBed.get(
       DEFAULT_OUTCOME_CLASSIFICATION);
     console.log(JSON.parse(DEFAULT_OUTCOME_CLASSIFICATION)+"DOC");
@@ -196,7 +198,7 @@ fdescribe('Learner answer info service', () => {
     // canAskLearnerAnswerInfo which is a boolean variable as true as every
     // probability index is greater than 0.
     spyOn(Math, 'random').and.returnValue(0);
-  });
+  }));
 
   afterEach(() => {
     httpTestingController.verify();
