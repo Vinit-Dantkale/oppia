@@ -15,6 +15,7 @@
 /**
  * @fileoverview Service for learner answer info.
  */
+
 import { downgradeInjectable } from '@angular/upgrade/static';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -105,7 +106,7 @@ export class LearnerAnswerInfoService {
       this.canAskLearnerForAnswerInfo = true;
       return;
     }
-    /*
+
     let classificationResult = (
       this.answerClassificationService.getMatchingClassificationResult(
         this.stateName, state.interaction, new Object(answer),
@@ -123,7 +124,6 @@ export class LearnerAnswerInfoService {
 
     this.canAskLearnerForAnswerInfo = (
       randomProbabilityIndex <= thresholdProbabilityIndex);
-    */
   }
 
   resetSubmittedAnswerInfoCount(): void {
@@ -163,5 +163,6 @@ export class LearnerAnswerInfoService {
     return ($('<span>').append(el)).html();
   }
 }
+
 angular.module('oppia').factory(
   'LearnerAnswerInfoService', downgradeInjectable(LearnerAnswerInfoService));
